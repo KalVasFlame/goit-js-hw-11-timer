@@ -5,6 +5,7 @@ const refs = {
   mins: document.querySelector('span[data-value="mins"]'),
   secs: document.querySelector('span[data-value="secs"]')
 }
+
 const makeSettings = ({days, hours, mins, secs}) => { 
 refs.days.textContent = `${days}`;
     refs.hours.textContent = `${hours}`;
