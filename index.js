@@ -5,27 +5,31 @@ const refs = {
   mins: document.querySelector('span[data-value="mins"]'),
   secs: document.querySelector('span[data-value="secs"]')
 }
-
-const makeTimer = time => { 
-  const days = pad(Math.floor(time / (1000 * 60 * 60 * 24)));
-  const hours = pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-  const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
-  const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
-
-  refs.days.textContent = `${days}`;
-  refs.hours.textContent = `${hours}`;
-  refs.mins.textContent = `${mins}`;
-  refs.secs.textContent = `${secs}`;
+const makeSettings = ({days, hours, mins, secs}) => { 
+refs.days.textContent = `${days}`;
+    refs.hours.textContent = `${hours}`;
+    refs.mins.textContent = `${mins}`;
+    refs.secs.textContent = `${secs}`;
 }
+const makeTimer = time => {
+  const settings = {
+    days: pad(Math.floor(time / (1000 * 60 * 60 * 24))),
+    hours: pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
+    mins: pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60))),
+    secs: pad(Math.floor((time % (1000 * 60)) / 1000)),
+  }
+makeSettings(settings)
+}
+
 
 class Timer { 
   constructor({ selector, targetDate }) { 
     this.selector = selector;
     this.targetDate = targetDate.getTime();
   }
-  start() { 
-    makeTimer(0)
+  start() {
     
+    makeTimer(0)
     const intId = setInterval(() => {
     const currentTime = Date.now()
     const remainingTime = this.targetDate - currentTime;
